@@ -56,5 +56,7 @@ namespace IdentityServer4.EntityFramework.Entities
         public string PairWiseSubjectSalt { get; set; }
         public List<ClientCorsOrigin> AllowedCorsOrigins { get; set; }
         public List<ClientProperty> Properties { get; set; }
+        // used for consistency
+        public string Stamp { get; set; }
     }
 }
