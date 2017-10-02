@@ -22,9 +22,7 @@ namespace IdentityServer4.EntityFramework.Stores
 
         public ResourceStore(IConfigurationDbContext context, ILogger<ResourceStore> logger)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger;
         }
 
@@ -97,7 +95,7 @@ namespace IdentityServer4.EntityFramework.Stores
             return Task.FromResult(results.Select(x => x.ToModel()).ToArray().AsEnumerable());
         }
 
-        public Task<Resources> GetAllResources()
+        public Task<Resources> GetAllResourcesAsync()
         {
             var identity = _context.IdentityResources
               .Include(x => x.UserClaims);

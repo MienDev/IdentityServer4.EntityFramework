@@ -21,9 +21,7 @@ namespace IdentityServer4.EntityFramework.Stores
 
         public ClientStore(IConfigurationDbContext context, ILogger<ClientStore> logger)
         {
-            if (context == null) throw new ArgumentNullException(nameof(context));
-
-            _context = context;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger;
         }
 
@@ -38,6 +36,7 @@ namespace IdentityServer4.EntityFramework.Stores
                 .Include(x => x.Claims)
                 .Include(x => x.IdentityProviderRestrictions)
                 .Include(x => x.AllowedCorsOrigins)
+                .Include(x => x.Properties)
                 .FirstOrDefault(x => x.ClientId == clientId);
             var model = client?.ToModel();
 
