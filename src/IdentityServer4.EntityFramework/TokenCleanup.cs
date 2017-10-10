@@ -44,7 +44,7 @@ namespace IdentityServer4.EntityFramework
 
             _source = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
 
-            Task.Factory.StartNew(() => StartInternal(_source.Token));
+            Task.Factory.StartNew(() => StartInternal(_source.Token), cancellationToken);
         }
 
         public void Stop()
